@@ -16,6 +16,21 @@ public class Employee {
     private  String department;
     private double salary;
 
+    public Employee() {
+
+    }
+
+    public Employee(int id, String firstname, String lastName, String email, String phone, String designation, String department, double salary) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.designation = designation;
+        this.department = department;
+        this.salary = salary;
+    }
+
     public int getId() {
         return id;
     }
