@@ -42,13 +42,15 @@ public class EmployeeServiceTest {
             "Quality Assurance",
             65000.00
     );
-    List<Employee> employeeListMock=new ArrayList<>(Arrays.asList(emp1,emp2));
+    List<Employee> employeeListMock = new ArrayList<>(Arrays.asList(emp1, emp2));
+
     @Test
-    void testGetAllEmployee(){
+    void testGetAllEmployee() {
 
 
         when(employeeRepository.findAll()).thenReturn(employeeListMock);
-        List<Employee> result=employeeService.getAllEmployees();
+        List<Employee> result = employeeService.getAllEmployees();
+        result=null;
         assertNotNull(result);
 
         verify(employeeRepository, times(1)).findAll();
