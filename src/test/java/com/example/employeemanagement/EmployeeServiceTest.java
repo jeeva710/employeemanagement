@@ -50,7 +50,6 @@ public class EmployeeServiceTest {
 
         when(employeeRepository.findAll()).thenReturn(employeeListMock);
         List<Employee> result = employeeService.getAllEmployees();
-       // result=null;
         assertNotNull(result);
 
         verify(employeeRepository, times(1)).findAll();
