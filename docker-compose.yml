@@ -1,0 +1,29 @@
+services:
+  javaprojects:
+    image: javaprojects
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8070:8070
+  db:
+    image: postgres:15
+    container_name: employeedb
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: employeedetails
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+
+  app:
+    image: jeeva10/employeemanagement:latest
+    container_name: employeemgmt
+    ports:
+      - "8070:8070"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/employeedetails
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
