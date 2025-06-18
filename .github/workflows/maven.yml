@@ -14,9 +14,9 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: employeedb
+          POSTGRES_DB: employeedetails
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: 1234
         ports:
           - 5433:5432  # 👈 maps container's port 5432 to GitHub Actions port 5433
         options: >-
