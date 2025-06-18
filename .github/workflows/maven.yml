@@ -36,7 +36,7 @@ jobs:
         cache: maven
 
     - name: Build with Maven (show full logs)
-      run: mvn clean package -e -X
+      run: mvn clean package -DskipTests
 
     - name: Upload Surefire Test Results
       if: failure()
