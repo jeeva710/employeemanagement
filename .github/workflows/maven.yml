@@ -136,3 +136,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: jeeva10/employeemanagement:latest
+      - name: Upload Docker Compose File
+        uses: actions/upload-artifact@v4
+        with:
+            name: docker-compose
+            path: docker-compose.yml
