@@ -24,6 +24,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/employeedetails
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
 
     steps:
     - uses: actions/checkout@v4
