@@ -137,7 +137,7 @@ jobs:
           push: true
           tags: jeeva10/employeemanagement:latest
       - name: Build and start docker compose
-        run:  docker -compose -f docker-compose.yml up -d --build
+        run:  docker -compose docker-compose.yml up -d --build
       - name: Upload Docker Compose File
         uses: actions/upload-artifact@v4
         with:
