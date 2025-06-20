@@ -143,3 +143,6 @@ jobs:
         with:
             name: docker-compose
             path: docker-compose.yml
+      - name: List running containers
+        run: docker ps -a
+
