@@ -10,6 +10,7 @@ services:
       POSTGRES_PASSWORD: 1234
     ports:
       - "5432:5432"  # Optional: needed only if you want host access
+    command: ["postgres", "-c", "listen_addresses=*"]
 
   app:
     image: jeeva10/employeemanagement:latest
