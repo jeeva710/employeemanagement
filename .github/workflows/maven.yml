@@ -111,7 +111,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven (skip tests)
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -Dspring.profiles.active=dev
 
       - name: Upload Surefire Test Results on Failure
         if: failure()
