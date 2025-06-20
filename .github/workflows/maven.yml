@@ -95,7 +95,7 @@ jobs:
           --health-retries 5
 
     env:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://employeedb:5432/employeedetails
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/employeedetails
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
 
@@ -145,6 +145,9 @@ jobs:
 #            path: docker-compose.yml
       - name: List running containers
         run: docker ps -a
+      - name: Print environment variables
+        run: printenv | grep SPRING
+
 #      - name: Docker error
 #        run: docker logs employeedb
 
