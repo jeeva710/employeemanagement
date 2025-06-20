@@ -145,4 +145,6 @@ jobs:
             path: docker-compose.yml
       - name: List running containers
         run: docker ps -a
+      - name: Docker error
+        run: docker logs employeedb
 
