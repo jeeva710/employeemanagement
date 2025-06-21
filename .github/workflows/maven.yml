@@ -155,6 +155,11 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker pull jeeva10/employeemanagement:latest
+            docker network create employee-network
+            docker stop employeedb || true
+            docker rm employeedb || true
+            docker run -d --name employeedb   --network employee-network   -e POSTGRES_DB=employeedetails   -e POSTGRES_USER=postgres   -e POSTGRES_PASSWORD=1234   -p 5432:5432 postgres:15
+
             docker stop employeemanagement || true
             docker rm employeemanagement || true
             docker run -d --name employeemanagement \
