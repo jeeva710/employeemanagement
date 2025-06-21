@@ -158,11 +158,11 @@ jobs:
             docker network inspect employee-network -f '{{range .Containers}}{{.Name}} {{end}}' | xargs -r docker stop && \
             docker network inspect employee-network -f '{{range .Containers}}{{.Name}} {{end}}' | xargs -r docker rm
   
-            docker network create employee-network
+            docker network create employee-network1
   
             docker stop employeedb || true
             docker rm employeedb || true
-            docker run -d --name employeedb   --network employee-network   -e POSTGRES_DB=employeedetails   -e POSTGRES_USER=postgres   -e POSTGRES_PASSWORD=1234   -p 5432:5432 postgres:15
+            docker run -d --name employeedb   --network employee-network1   -e POSTGRES_DB=employeedetails   -e POSTGRES_USER=postgres   -e POSTGRES_PASSWORD=1234   -p 5432:5432 postgres:15
 
             docker stop employeemanagement || true
             docker rm employeemanagement || true
