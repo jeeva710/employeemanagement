@@ -154,14 +154,35 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            docker network inspect employeenet >/dev/null 2>&1 || docker network create employeenet
+
+            docker stop db || true
+            docker rm db || true
+
+            docker run -d --name db \
+              --network employeenet \
+              -e POSTGRES_DB=employeedetails \
+              -e POSTGRES_USER=postgres \
+              -e POSTGRES_PASSWORD=1234 \
+              -p 5432:5432 \
+              postgres:15
+
+            echo "Waiting for PostgreSQL to initialize..."
+            sleep 15
+
             docker pull jeeva10/employeemanagement:latest
+
             docker stop employeemanagement || true
             docker rm employeemanagement || true
+
             docker run -d --name employeemanagement \
-            -e SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/employeedetails \
-            -e SPRING_DATASOURCE_USERNAME=postgres \
-            -e SPRING_DATASOURCE_PASSWORD=1234 \
-            -p 8070:8070 jeeva10/employeemanagement:latest
+              --network employeenet \
+              -e SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/employeedetails \
+              -e SPRING_DATASOURCE_USERNAME=postgres \
+              -e SPRING_DATASOURCE_PASSWORD=1234 \
+              -p 8070:8070 \
+              jeeva10/employeemanagement:latest
+
 
 #      - name: Docker error
 #        run: docker logs employeedb
