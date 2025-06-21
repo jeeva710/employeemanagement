@@ -155,7 +155,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker pull jeeva10/employeemanagement:latest
-            docker network rm employee-network
+            docker network inspect employee-network -f '{{range .Containers}}{{.Name}} {{end}}' | xargs -r docker stop && \
+            docker network inspect employee-network -f '{{range .Containers}}{{.Name}} {{end}}' | xargs -r docker rm
+  
             docker network create employee-network
   
             docker network create employee-network
