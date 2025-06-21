@@ -15,4 +15,4 @@ RUN chmod +x /wait-for-it.sh
 EXPOSE 8070
 
 # Wait for the database before starting the app
-ENTRYPOINT ["/wait-for-it.sh", "db:5432", "--", "java", "-jar", "/javaprojects.jar"]
+ENTRYPOINT ["/wait-for-it.sh", "employeedb:5432", "--", "java", "-jar", "/javaprojects.jar"]
