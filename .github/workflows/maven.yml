@@ -155,6 +155,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker pull jeeva10/employeemanagement:latest
+            docker network rm employee-network
+            docker network create employee-network
+  
             docker network create employee-network
             docker stop employeedb || true
             docker rm employeedb || true
