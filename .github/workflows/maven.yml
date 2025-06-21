@@ -156,10 +156,10 @@ jobs:
           script: |
             docker network inspect employeenet >/dev/null 2>&1 || docker network create employeenet
 
-            docker stop db || true
-            docker rm db || true
+            docker stop db1 || true
+            docker rm db1 || true
 
-            docker run -d --name db \
+            docker run -d --name db1 \
               --network employeenet \
               -e POSTGRES_DB=employeedetails \
               -e POSTGRES_USER=postgres \
@@ -177,7 +177,7 @@ jobs:
 
             docker run -d --name employeemanagement \
               --network employeenet \
-              -e SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/employeedetails \
+              -e SPRING_DATASOURCE_URL=jdbc:postgresql://db1:5432/employeedetails \
               -e SPRING_DATASOURCE_USERNAME=postgres \
               -e SPRING_DATASOURCE_PASSWORD=1234 \
               -p 8070:8070 \
