@@ -82,7 +82,7 @@ jobs:
             docker pull jeeva10/employeemanagement:latest
             docker network inspect employee-network -f '{{range .Containers}}{{.Name}} {{end}}' | xargs -r docker stop && \
             docker network inspect employee-network -f '{{range .Containers}}{{.Name}} {{end}}' | xargs -r docker rm
-            docker network rm employee-network1 || true
+#            docker network rm employee-network1 || true
             docker network create employee-network1
   
             docker stop employeedb || true
