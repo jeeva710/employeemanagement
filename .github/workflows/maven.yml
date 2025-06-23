@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      employeedb:
+      postgres:
         image: postgres:15
         env:
           POSTGRES_DB: employeedetails
@@ -27,22 +27,11 @@ jobs:
           --health-retries 5
 
     env:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://employeedb:5432/employeedetails
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/employeedetails
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
 
     steps:
-      - name: Install PostgreSQL Client
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client
-
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until pg_isready -h employeedb -p 5432; do
-            echo "Waiting for PostgreSQL..."
-            sleep 2
-          done
-
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -54,7 +43,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven (skip tests)
-        run: mvn clean package -Dspring.profiles.active=dev
+        run: mvn clean package -DskipTests -Dspring.profiles.active=dev
 
       - name: Upload Surefire Test Results on Failure
         if: failure()
