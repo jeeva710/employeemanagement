@@ -32,6 +32,17 @@ jobs:
       SPRING_DATASOURCE_PASSWORD: 1234
 
     steps:
+      - name: Install PostgreSQL Client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h employeedb -p 5432; do
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
+
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
